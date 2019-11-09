@@ -5,7 +5,6 @@
 
 ## Back-end Repositories
 - Python
-- Go
 - Rust
 - Java
 
@@ -27,7 +26,10 @@ Params {
   sort: String<'asc' | 'desc'>
 }
 
-ResponseData {
+<!-- Success -->
+returns ApiResponse
+ApiResponse.status: 'success'
+ApiResponse.data {
   comments: Array<{
     id: String
     name: String
@@ -35,6 +37,10 @@ ResponseData {
     body: String
   }>
 }
+
+<!-- Error -->
+returns ApiResponse
+ApiResponse.status: 'error'
 ```
 ```
 POST /api/comments
@@ -44,4 +50,13 @@ Body {
   title: String
   body: String
 }
+
+<!-- Success -->
+returns ApiResponse
+ApiResponse.status: 'success'
+
+<!-- Error -->
+returns ApiResponse
+ApiResponse.status: 'error'
+
 ```
