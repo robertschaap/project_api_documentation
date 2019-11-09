@@ -1,6 +1,7 @@
 # BulletinBoard v2
 ## Front-end Repositories
 - React
+- Svelte
 
 ## Back-end Repositories
 - Python
