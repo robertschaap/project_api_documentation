@@ -3,7 +3,7 @@
 - React
 - Vue
 
-## Back-ends Repositories
+## Back-end Repositories
 - Node & Mongo
 - Go
 
