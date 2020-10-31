@@ -8,65 +8,68 @@
 - Java
 
 ## Api Response
-```
-ApiResponse<ResponseData> {
-  status: String<'success' | 'error'>
-  data: Object<ResponseData>
-  message: String
+```typescript
+type ApiResponse<ResponseData> = {
+  status: 'success' | 'error';
+  data: ResponseData;
+  message: string | null;
 }
+
 ```
 
 ## Api Routes
-```
-GET /api/products
-
-Params {
-  page: Number<increments of 1>
+### `GET /api/products`
+```typescript
+type QueryParams = {
+  page: number; // increments of 1
 }
 
-<!-- Success -->
-returns ApiResponse
-ApiResponse.status = 'success'
-ApiResponse.data = Array<Product>
-```
-
-```
-GET /api/product/{id}
-
-Params {
-  id: String
+type SuccessResponse = {
+  status: 'success';
+  data: Array<Product>;
+  message: null;
 }
 
-<!-- Success -->
-returns ApiResponse
-ApiResponse.status = 'succes'
-ApiResponse.data = Product
+```
 
-<!-- Error -->
-returns ApiResponse
-ApiResponse.status = 'error'
-ApiResponse.data = Null
-ApiResponse.message = 'Product could not be found'
+`GET /api/product/{id}`
+```typescript
+type Params = {
+  id: String;
+}
+
+type SuccessResponse = {
+  status: 'success';
+  data: Product;
+  message: null;
+}
+
+type ErrorResponse = {
+  status: 'error';
+  data: null;
+  message: 'Product could not be found';
+}
+
 ```
 
 ## Types
-```
-Product {
-  id: Number
-  manufacturer: String
-  model: String
-  modelId: String
+```typescript
+type Product = {
+  id: number;
+  manufacturer: string;
+  model: string;
+  modelId: string;
   variants: Array<{
-    id: Number
-    variantId: String
-    color: String
-    colorHex: String
-    capacity: String
-    is_in_stock: Boolean
-    is_preorder: Boolean
-    regular_price: String
-    discounted_price: String
-    has_discounts: Boolean
+    id: number;
+    variantId: string;
+    color: string;
+    colorHex: string;
+    capacity: string;
+    is_in_stock: boolean;
+    is_preorder: boolean;
+    regular_price: string;
+    discounted_price: string;
+    has_discounts: boolean;
   }>
 }
 ```
