@@ -16,23 +16,8 @@ type ApiResponse<ResponseData> = {
 }
 
 ```
-
 ## Api Routes
-### `GET /api/products`
-```typescript
-type QueryParams = {
-  page: number; // increments of 1
-}
-
-type SuccessResponse = {
-  status: 'success';
-  data: Array<Product>;
-  message: null;
-}
-
-```
-
-`GET /api/product/{id}`
+### `GET /api/product/{id}`
 ```typescript
 type Params = {
   id: String;
@@ -51,20 +36,44 @@ type ErrorResponse = {
 }
 
 ```
+### `GET /api/products`
+```typescript
+type QueryParams = {
+  page: number; // increments of 1
+}
+
+type SuccessResponse = {
+  status: 'success';
+  data: Array<Product>;
+  message: null;
+}
+
+```
+
+### `GET /api/subscriptions`
+```typescript
+type SuccessResponse = {
+  status: 'success';
+  data: Array<Subscription>;
+  message: null;
+}
+
+```
 
 ## Types
+### Product
 ```typescript
 type Product = {
   id: number;
   manufacturer: string;
   model: string;
-  modelId: string;
+  modelId: string; // manufacturer-model
   variants: Array<{
     id: number;
-    variantId: string;
-    color: string;
+    variantId: string; // manufacturer-model-xxgb-colorname
+    color: string; // colorname
     colorHex: string;
-    capacity: string;
+    capacity: string; // xxgb
     is_in_stock: boolean;
     is_preorder: boolean;
     regular_price: string;
@@ -72,4 +81,19 @@ type Product = {
     has_discounts: boolean;
   }>
 }
+
+```
+
+### Subscription
+```typescript
+type Subscription = {
+  id: number;
+  subscriptionId: string; // royalmobile-xxgb-xduration
+  durationId: string; // xduration
+  data: string; // xxgb
+  benefits_long: Array<string>;
+  benefits_short: string;
+  regular_price: string;
+}
+
 ```
