@@ -5,6 +5,7 @@
 ## Back-end Repositories
 - Go
 - Python
+- Java
 
 ## Api Response
 ```
@@ -26,28 +27,46 @@ Params {
 <!-- Success -->
 returns ApiResponse
 ApiResponse.status = 'success'
-ApiResponse.data = Array<{
-  id: number
-  manufacturer: string
-  model: string
-  modelId: string
-  variants: Array<{
-    id: number
-    variantId: string
-    color: string
-    colorHex: string
-    capacity: string
-    is_in_stock: boolean
-    is_preorder: boolean
-    regular_price: string
-    discounted_price: string
-    has_discounts: boolean
-  }>
-  specifications?: {}
-}>
+ApiResponse.data = Array<Product>
+```
+
+```
+GET /api/product/{id}
+
+Params {
+  id: String
+}
+
+<!-- Success -->
+returns ApiResponse
+ApiResponse.status = 'succes'
+ApiResponse.data = Product
 
 <!-- Error -->
 returns ApiResponse
 ApiResponse.status = 'error'
-ApiResponse.message = 'Products could not be found'
+ApiResponse.data = Null
+ApiResponse.message = 'Product could not be found'
+```
+
+## Types
+```
+Product {
+  id: Number
+  manufacturer: String
+  model: String
+  modelId: String
+  variants: Array<{
+    id: Number
+    variantId: String
+    color: String
+    colorHex: String
+    capacity: String
+    is_in_stock: Boolean
+    is_preorder: Boolean
+    regular_price: String
+    discounted_price: String
+    has_discounts: Boolean
+  }>
+}
 ```
