@@ -13,15 +13,35 @@ type ApiResponse<ResponseData> = {
   status: 'success' | 'error';
   data: ResponseData;
   message: string | null;
-}
+};
 
 ```
+
 ## Api Routes
+### `GET /api/cart/{id}`
+```typescript
+type Params = {
+  id: string // UUIDv4 or new-cart for the dummy cart
+};
+
+type SuccessReponse = ApiResponse<{
+  status: 'success';
+  data:  Cart;
+  message: null;
+}>;
+
+type ErrorResponse = ApiResponse<{
+  status: 'error';
+  data: null;
+  message: 'Could not get cart'
+}>;
+```
+
 ### `GET /api/product/{id}`
 ```typescript
 type Params = {
   id: String;
-}
+};
 
 type SuccessResponse = ApiResponse<{
   status: 'success';
@@ -32,15 +52,16 @@ type SuccessResponse = ApiResponse<{
 type ErrorResponse = ApiResponse<{
   status: 'error';
   data: null;
-  message: 'Product could not be found';
+  message: 'Could not get product';
 }>;
 
 ```
+
 ### `GET /api/products`
 ```typescript
 type QueryParams = {
   page: number; // increments of 1
-}
+};
 
 type SuccessResponse = ApiResponse<{
   status: 'success';
@@ -61,6 +82,28 @@ type SuccessResponse = ApiResponse<{
 ```
 
 ## Types
+### Cart, CartItem
+```typescript
+type Cart = {
+  id: string; // UUIDv4 or 'new-cart'
+  items: Array<CartItem>;
+  totals: {
+    monthly_price: string;
+    onetime_price: string;
+  };
+};
+
+type CartItem = {
+  id: string; // UUIDv4
+  product: Product; // only pass relevant ProductVariant
+  subscription: Subscription;
+  totals: {
+    monthly_price: string;
+    onetime_price: string;
+  };
+};
+```
+
 ### Product
 ```typescript
 type Product = {
@@ -82,8 +125,7 @@ type ProductVariant = {
   regular_price: string;
   discounted_price: string;
   has_discounts: boolean;
-  }>
-}
+};
 
 ```
 
@@ -97,6 +139,6 @@ type Subscription = {
   benefits_long: Array<string>;
   benefits_short: string;
   regular_price: string;
-}
+};
 
 ```
