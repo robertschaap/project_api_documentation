@@ -23,17 +23,17 @@ type Params = {
   id: String;
 }
 
-type SuccessResponse = {
+type SuccessResponse = ApiResponse<{
   status: 'success';
   data: Product;
   message: null;
-}
+}>;
 
-type ErrorResponse = {
+type ErrorResponse = ApiResponse<{
   status: 'error';
   data: null;
   message: 'Product could not be found';
-}
+}>;
 
 ```
 ### `GET /api/products`
@@ -42,21 +42,21 @@ type QueryParams = {
   page: number; // increments of 1
 }
 
-type SuccessResponse = {
+type SuccessResponse = ApiResponse<{
   status: 'success';
   data: Array<Product>;
   message: null;
-}
+}>;
 
 ```
 
 ### `GET /api/subscriptions`
 ```typescript
-type SuccessResponse = {
+type SuccessResponse = ApiResponse<{
   status: 'success';
   data: Array<Subscription>;
   message: null;
-}
+}>;
 
 ```
 
