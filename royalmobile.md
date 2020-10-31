@@ -68,17 +68,20 @@ type Product = {
   manufacturer: string;
   model: string;
   modelId: string; // manufacturer-model
-  variants: Array<{
-    id: number;
-    variantId: string; // manufacturer-model-xxgb-colorname
-    color: string; // colorname
-    colorHex: string;
-    capacity: string; // xxgb
-    is_in_stock: boolean;
-    is_preorder: boolean;
-    regular_price: string;
-    discounted_price: string;
-    has_discounts: boolean;
+  variants: Array<ProductVariant>;
+};
+
+type ProductVariant = {
+  id: number;
+  variantId: string; // manufacturer-model-xxgb-colorname
+  color: string; // colorname
+  colorHex: string;
+  capacity: string; // xxgb
+  is_in_stock: boolean;
+  is_preorder: boolean;
+  regular_price: string;
+  discounted_price: string;
+  has_discounts: boolean;
   }>
 }
 
