@@ -12,179 +12,179 @@
 
 TODO: write out responses
 
-## Api Response
-```
-ApiResponse<ResponseData> {
-  status: String<'success' | 'error'>
-  data: Object<ResponseData>
-  message: String
-}
-```
-
-## Api Routes
-```
-POST /api/comments/new
-
-Body {
-  body: String
-  userId: String
-  postId: String
+## API Response
+```typescript
+type ApiResponse<ResponseData> = {
+  status: 'success' | 'error';
+  data: Object<ResponseData>;
+  message: string;
 }
 
-<!-- Success -->
-returns ApiResponse
+```
 
-ApiResponse.status: 'success'
-ApiResponse.data {
-  comment: {
-    body: String
-    userId: String
-    postId: String
-  }
-}
-```
-```
-GET /api/posts/
-<!-- Success -->
-returns ApiResponse
-
-ApiResponse.status: 'success'
-ApiResonse.data {
-  posts: Array<{
-    title: String
-    body: String
-    category: String
-    userId: String
-    author: String
-  }>
-}
-```
-```
-GET /api/posts/{category}
-
-Params {
-  category: String
+## API Routes
+### `POST /api/comments/new`
+```typescript
+type Params = {
+  body: string;
+  userId: string;
+  postId: string;
 }
 
-<!-- Success -->
-returns ApiResponse
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    comment: {
+      body: string;
+      userId: string;
+      postId: string;
+    };
+  };
+}>;
 
-ApiResponse.status: 'success'
-ApiResonse.data {
-  posts: Array<{
-    title: String
-    body: String
-    category: String
-    userId: String
-    author: String
-  }>
-}
 ```
-```
-GET /api/posts/{id}
 
-Params {
-  id: String
+### `GET /api/posts/`
+```typescript
+type ApiResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    posts: Array<{
+      title: string;
+      body: string;
+      category: string;
+      userId: string;
+      author: string;
+    }>;
+  };
+}>;
+
+```
+
+### `GET /api/posts/{category}`
+```typescript
+type Params = {
+  category: string;
 }
 
-<!-- Success -->
-returns ApiResponse
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    posts: Array<{
+      title: string;
+      body: string;
+      category: string;
+      userId: string;
+      author: string;
+    }>;
+  };
+}>;
 
-ApiResponse.status: 'success'
-ApiResonse.data {
-  posts: Array<{
-    postAuthor: String
-    postBody: {
-      title: String
-      body: String
-      category: String
-      userId: String
-    }
-    comments: Array<{
-      body: String
-      userId: String
-      postId: String
-      author: String
+```
+
+### `GET /api/posts/{id}`
+```typescript
+type Params =  {
+  id: string;
+}
+
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    posts: Array<{
+      postAuthor: string;
+      postBody: {
+        title: string;
+        body: string;
+        category: string;
+        userId: string;
+      };
+      comments: Array<{
+        body: string;
+        userId: string;
+        postId: string;
+        author: string;
+      }>;
     }>
-  }>
-}
+  };
+}>;
+
 ```
+
+### `POST /api/posts/new`
+```typescript
+type Params = {
+  title: string;
+  body: string;
+  category: string;
+  userId: string;
+}
+
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    post: {
+      title: string;
+      body: string;
+      category: string;
+      userId: string;
+    };
+  };
+}>;
+
 ```
-POST /api/posts/new
 
-Body {
-  title: String
-  body: String
-  category: String
-  userId: String
-}
+### `POST /users/new`
+```typescript
+type Params = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+  bio: string;
+  password: string;
+};
 
-<!-- Success -->
-returns ApiResponse
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    user: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      userName: string;
+      bio: string;
+      password: string;
+    };
+  };
+}>;
 
-ApiResponse.status: 'success'
-ApiResponse.data {
-  post: {
-    title: String
-    body: String
-    category: String
-    userId: String
-  }
-}
 ```
-```
-POST /users/new
 
-Body {
-  firstName: String
-  lastName: String
-  email: String
-  userName: String
-  bio: String
-  password: String
-}
+### `POST /users/login`
+```typescript
+type Params = {
+  userName: string;
+  password: string;
+};
 
-<!-- Success -->
-return ApiResponse
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    user: {
+      id: string;
+      firstName: string;
+      lastName: string;
+    };
+    token: string;
+  };
+}>;
 
-ApiResponse.status: 'success'
-ApiResponse.data {
-  user {
-    firstName: String
-    lastName: String
-    email: String
-    userName: String
-    bio: String
-    password: String
-  }
-}
-```
-```
-POST /users/login
+type ErrorResponse = ApiResponse<{
+  status: 'error';
+  message: 'access denied';
+}>;
 
-Body {
-  userName: String
-  password: String
-}
-
-<!-- Success -->
-return ApiResponse
-
-ApiResponse.status
-ApiResponse.data {
-  user {
-    id: String
-    firstName: String
-    lastName: String
-  }
-  token: String
-}
-
-<!-- Error -->
-return ApiResponse
-
-ApiResponse.status: 'error'
-ApiResponse.message: 'access denied'
 ```
 
 TODO: check `users/new` for return of password or clarify here
