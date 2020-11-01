@@ -7,56 +7,67 @@
 - Python
 - Rust
 - Java
+- Nest
 
-## Api Response
+## API Response
+```typescript
+type ApiResponse<ResponseData> {
+  status: 'success' | 'error';
+  data: Object<ResponseData> | null;
+  message: null | string;
+};
+
 ```
-ApiResponse<ResponseData> {
-  status: String<'success' | 'error'>
-  data: Object<ResponseData>
-  message: String
-}
-```
 
-## Api Routes
-```
-GET /api/comments
+## API Routes
+### `GET /api/comments`
 
-Params {
-  offset: Number<increments of 4>
-  sort: String<'asc' | 'desc'>
-}
-
-<!-- Success -->
-returns ApiResponse
-ApiResponse.status: 'success'
-ApiResponse.data {
-  comments: Array<{
-    id: String
-    name: String
-    title: String
-    body: String
-  }>
+```typescript
+type QueryParams = {
+  offset: number; // increments of 4
+  sort: 'asc' | 'desc';
 }
 
-<!-- Error -->
-returns ApiResponse
-ApiResponse.status: 'error'
-```
-```
-POST /api/comments
+type SuccessResponse = ApiResponse<{
+  status: 'success';
+  data: {
+    comments: Array<{
+      id: string;
+      name: string;
+      title: string;
+      body: string;
+    }>
+  };
+  message: null;
+}>;
 
-Body {
-  name: String
-  title: String
-  body: String
+type ErrorResponse = ApiResponse<{
+  status: 'error';
+  data: null;
+  message: '';
+}>;
+
+```
+
+### `POST /api/comments`
+
+```typescript
+type Params = {
+  name: string;
+  title: string;
+  body: string;
 }
 
-<!-- Success -->
-returns ApiResponse
-ApiResponse.status: 'success'
+type SuccessRespone = ApiResponse<{
+  status: 'success';
+  data: null;
+  message: null;
+}>;
 
-<!-- Error -->
-returns ApiResponse
-ApiResponse.status: 'error'
+type ErrorResponse = ApiResponse<{
+  status: 'error';
+  data: null;
+  message: '';
+}>;
 
 ```
