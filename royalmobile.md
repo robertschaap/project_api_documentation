@@ -97,6 +97,7 @@ type SuccessResponse = ApiResponse<{
 A cart contains `Array<CartItem>` of 0 or more `CartItem`s. The `id` field of the cart should be formatted as a v4 UUID type, with exception of the `new-cart` which is only used for easy debugging.
 
 A `CartItem` has to contain both a `Product` and a `Subscription`. The `Product` is reduced to only having a single `ProductVariant` in it's `variants` attribute.
+
 ```typescript
 type Cart = {
   id: string; // UUIDv4 or 'new-cart'
