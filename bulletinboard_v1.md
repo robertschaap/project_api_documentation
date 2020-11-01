@@ -11,42 +11,42 @@
 - Next
 - Node & Pug
 
-## Api Routes
-```
-GET /api/comment
+## API Routes
+### `GET /api/comment`
+```typescript
+type QueryParams = {
+  offset: number; // increments of 4
+  sort: 'asc' | 'desc';
+};
 
-Params {
-  offset: Number<increments of 4>
-  sort: String<'asc' | 'desc'>
-}
+type SuccessResponse = Array<Comment>;
 
-<!-- Success -->
-returns Array<Comments>
-
-Comments {
-  name: String
-  title: String
-  body: String
-  avatar: String
-}
-
-<!-- Error -->
-returns Array<>
+type ErrorResponse = Array<>;
 
 ```
+
+### `POST /api/comment/new`
+```typescript
+type Params = {
+  name: string;
+  title: string;
+  body: string;
+  avatar: string;
+};
+
+type SuccessResponse = null;
+
+type ErrorResponse = null;
 ```
-POST /api/comment/new
 
-Body {
-  name: String
-  title: String
-  body: String
-  avatar: String
-}
+## Types
+### Comment
+```typescript
+type Comment = {
+  name: string;
+  title: string;
+  body: string;
+  avatar: string;
+};
 
-<!-- Success -->
-returns null
-
-<!-- Error -->
-returns null
 ```
